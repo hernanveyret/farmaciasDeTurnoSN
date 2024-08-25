@@ -49,7 +49,7 @@ footer {
 }
 .almanaque, .farmacias {
   max-width: 100%;
-  min-height: calc(50vh - var(--altoHeader));
+  min-height: calc(50vh - var(--altoHeader) - var(--altoFooter));
   border: 1px solid green;
 }
 
