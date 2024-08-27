@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Almanac from './Almanac';
+import AlmanacDay from './AlmanacDay';
 
 import './home.css';
 
@@ -54,7 +55,7 @@ const Home = () => {
       mes:"Diciembre"
     },
   ]
-  
+  const [ almanacType, setAlmanacType ] = useState(true)
   const [ fecha, setFecha ] = useState(new Date());
   const [ day, setDay ] = useState(fecha.getDate()); // dia en numero.
   const [ dayString, setDayString ] = useState(fecha.toLocaleString('es-ES', { weekday: 'long' }));
@@ -106,7 +107,7 @@ const Home = () => {
       </header>
       <main>
         <article className="almanaque">
-             <Almanac 
+             { almanacType ? <Almanac 
                 day={day}
                 month={month}
                 monthString={monthString} 
@@ -116,7 +117,9 @@ const Home = () => {
                 handlePrev={handlePrev} 
                 handleNext={handleNext} 
                 handleDay={handleDay} 
-            />
+            /> : 
+              <AlmanacDay />
+            }
         </article>
         <article className="farmacias">
             <p>Lista de farmacias</p>
