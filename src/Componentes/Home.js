@@ -70,28 +70,24 @@ const Home = () => {
   console.log('mes:', month)
   console.log('mes string:', monthString)
   console.log('año:', year)
+  console.log('ultimo dia del mes anterior', cantDiasMes) // ultimo dia del mes anterior
+  console.log('celvas vacias', celdasVacias); // posicion del primer dia del mes del 0 al 6.
   */
- console.log('ultimo dia del mes anterior', cantDiasMes) // ultimo dia del mes anterior
- console.log('celvas vacias', celdasVacias); // posicion del primer dia del mes del 0 al 6.
 
-  const handleAnt = () => {
-    console.log('anterior')
-    setMonth(month - 1);
-    
+  // Mes anterior
+  const handlePrev = () => {
+    month === 0 ? setMonth(0) : setMonth(month - 1);
   }
-  
+  //Mes siguiente
   const handleNext = () => {
-    console.log('siguiente')
-     setMonth(month + 1);
-    
+     month === 11 ? setMonth(11) : setMonth(month + 1);
   }
 
   useEffect(() => {
     setCantDiasMes(new Date(year, month + 1, 0).getDate())
     setCeldasVacias(new Date(year, month, 1).getDay())
     setMonthString(meces.find(m => m.id === month).mes)
-    console.log(cantDiasMes)
-    console.log(celdasVacias)
+    console.log(month)
   },[month,year])
 
   // el metodo trim() elimina los espacios vacios de lo que traiga el target
@@ -111,18 +107,19 @@ const Home = () => {
       <main>
         <article className="almanaque">
              <Almanac 
-                day={day}  
+                day={day}
+                month={month}
                 monthString={monthString} 
                 year={year} 
                 cantDiasMes={cantDiasMes} 
                 celdasVacias={celdasVacias} 
-                handleAnt={handleAnt} 
+                handlePrev={handlePrev} 
                 handleNext={handleNext} 
                 handleDay={handleDay} 
             />
         </article>
         <article className="farmacias">
-            <p>farmacias</p>
+            <p>Lista de farmacias</p>
         </article>
       </main>
       <footer>

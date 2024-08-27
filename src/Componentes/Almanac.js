@@ -2,7 +2,7 @@ import React from 'react';
 
 import './almanaque.css'
 
-const Almanac = ({day,monthString,year,cantDiasMes,celdasVacias,handleAnt,handleNext,handleDay}) => {
+const Almanac = ({day,month,monthString,year,cantDiasMes,celdasVacias,handlePrev,handleNext,handleDay}) => {
   let days = []
   let cells = []
   let rows = []
@@ -39,8 +39,20 @@ const Almanac = ({day,monthString,year,cantDiasMes,celdasVacias,handleAnt,handle
 
   return (
     <div className="containerAlmanac">
+          { <div className="caption">
+            { month === 0 ? <button className="btn-mes btn-prev" onClick={handlePrev} style={{display:"none"}}>
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z"/></svg>
+            </button> : <button className="btn-mes btn-prev" onClick={handlePrev}>
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z"/></svg>
+            </button> }
+            {day} de {monthString} de {year}
+            { month === 11 ? <button className="btn-mes btn-next" onClick={handleNext} style={{display:"none"}}>
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+            </button> : <button className="btn-mes btn-next" onClick={handleNext}>
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+            </button> }
+          </div>}
       <table border="0">
-          { <caption><button className="btn-mes" onClick={handleAnt}><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z"/></svg></button>{day} de {monthString} de {year}<button className="btn-mes" onClick={handleNext}><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg></button></caption>}
         <thead>
         <tr>
           <th>DO</th>
