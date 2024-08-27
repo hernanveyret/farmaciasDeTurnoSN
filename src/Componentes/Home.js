@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Almanac from './Almanac';
 import AlmanacDay from './AlmanacDay';
+import Settings from './Settings';
 
 import './home.css';
 
@@ -56,6 +57,7 @@ const Home = () => {
     },
   ]
   const [ almanacType, setAlmanacType ] = useState(true)
+  const [ settings, setSettings ] = useState(false)
   const [ fecha, setFecha ] = useState(new Date());
   const [ day, setDay ] = useState(fecha.getDate()); // dia en numero.
   const [ dayString, setDayString ] = useState(fecha.toLocaleString('es-ES', { weekday: 'long' }));
@@ -104,23 +106,29 @@ const Home = () => {
     <div className="containerHome">
       <header>
         <h1>Farmacias de turno SN</h1>
-        <button className="btn-menu"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M480-160q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm0-240q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm0-240q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Z"/></svg></button>
+        <button className="btn-menu" onClick={() => {setSettings(true)}}>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M480-160q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm0-240q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm0-240q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Z"/></svg>
+        </button>
       </header>
       <main>
+          {
+            settings && <Settings setSettings={setSettings}/>
+          }
         <article className="almanaque">
-             { almanacType ? <Almanac 
-                day={day}
-                month={month}
-                monthString={monthString} 
-                year={year} 
-                cantDiasMes={cantDiasMes} 
-                celdasVacias={celdasVacias} 
-                handlePrev={handlePrev} 
-                handleNext={handleNext} 
-                handleDay={handleDay} 
-            /> : 
-              <AlmanacDay />
-            }
+          { almanacType ? <Almanac 
+              day={day}
+              month={month}
+              monthString={monthString} 
+              year={year} 
+              cantDiasMes={cantDiasMes} 
+              celdasVacias={celdasVacias} 
+              handlePrev={handlePrev} 
+              handleNext={handleNext} 
+              handleDay={handleDay}
+          /> : 
+            <AlmanacDay />
+          }
+          
         </article>
         <article className="farmacias">
             <p>Lista de farmacias</p>
