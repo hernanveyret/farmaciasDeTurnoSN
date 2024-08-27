@@ -62,7 +62,7 @@ footer {
   background: transparent;
   color: white;
   position: absolute;
-  right: .2rem;
+  right: .5rem;
 }
 @media screen and ( min-width: 37em) {
   main {
