@@ -26,12 +26,13 @@ table {
   width: 100%;
   text-align: center;
 }
-
+td {
+  box-sizing: border-box;
+}
 .btn-mes {
   border: none;
   background: transparent;
   margin: 0 1rem;
-  cursor: pointer;
   position: absolute;
 }
 .btn-prev {
@@ -39,4 +40,11 @@ table {
 }
 .btn-next {
   right: 0;
+}
+
+@media screen and ( min-width: 37em) {
+  table {
+    height: 50vh;
+  }
+ 
 }

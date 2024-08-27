@@ -20,7 +20,7 @@ const Almanac = ({day,month,monthString,year,cantDiasMes,celdasVacias,handlePrev
   // Crea la primera fila con las vacias y las que tienen numero.
   for(let i=1; i<= 7-celdasVacias; i++){
     diasDelMes++
-    day === diasDelMes ? cells.push(<td key={`day-${diasDelMes}`} style={{border: "1px solid green", borderRadius: "5px"}} onClick={handleDay}>{diasDelMes}</td>) : cells.push(<td key={`day-${diasDelMes}`} onClick={handleDay}>{diasDelMes}</td>)
+    day === diasDelMes ? cells.push(<td key={`day-${diasDelMes}`} style={{backgroundColor: "orange",borderRadius:"5px", cursor:"pointer"}} onClick={handleDay}>{diasDelMes}</td>) : cells.push(<td key={`day-${diasDelMes}`} onClick={handleDay} style={{cursor:"pointer"}}>{diasDelMes}</td>)
   }
     rows.push(<tr key={`row-1`}>{cells}</tr>)
 
@@ -31,7 +31,7 @@ const Almanac = ({day,month,monthString,year,cantDiasMes,celdasVacias,handlePrev
           cells.push(<td key={`empty-${filas}-${celdas}`}></td>);
       }else{  
         diasDelMes++
-        day === diasDelMes ? cells.push(<td key={`day-${diasDelMes}`} style={{border: "1px solid green", borderRadius:"5px"}} onClick={handleDay}>{diasDelMes}</td>) : cells.push(<td key={`day-${diasDelMes}`} onClick={handleDay}>{diasDelMes}</td>)
+        day === diasDelMes ? cells.push(<td key={`day-${diasDelMes}`} style={{backgroundColor: "orange",borderRadius:"5px", cursor:"pointer"}} onClick={handleDay}>{diasDelMes}</td>) : cells.push(<td key={`day-${diasDelMes}`} onClick={handleDay} style={{cursor:"pointer"}}>{diasDelMes}</td>)
       }
       }
       rows.push(<tr key={`row-${filas + 1}`}>{cells}</tr>)
@@ -55,13 +55,13 @@ const Almanac = ({day,month,monthString,year,cantDiasMes,celdasVacias,handlePrev
       <table border="0">
         <thead>
         <tr>
-          <th>DO</th>
-          <th>LU</th>
-          <th>MA</th>
-          <th>MI</th>
-          <th>JU</th>
-          <th>VI</th>
-          <th>SA</th>
+          <th>Do</th>
+          <th>Lu</th>
+          <th>Ma</th>
+          <th>Mi</th>
+          <th>Ju</th>
+          <th>Vi</th>
+          <th>Sa</th>
         </tr>
       </thead>
       <tbody>
