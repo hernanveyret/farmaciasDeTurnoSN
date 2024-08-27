@@ -16,3 +16,10 @@ table {
   width: 100%;
   text-align: center;
 }
+
+.btn-mes {
+  border: none;
+  background: transparent;
+  margin: 0 1rem;
+  cursor: pointer;
+}

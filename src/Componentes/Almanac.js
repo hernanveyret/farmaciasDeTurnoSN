@@ -2,62 +2,45 @@ import React from 'react';
 
 import './almanaque.css'
 
-const Almanac = ({day,monthString,year,cantDiasMes,celdasVacias}) => {
+const Almanac = ({day,monthString,year,cantDiasMes,celdasVacias,handleAnt,handleNext,handleDay}) => {
   let days = []
   let cells = []
   let rows = []
-  let diasDelMes = 1
+  let diasDelMes = 0
 
-  
-  
   // crea un array con la cantidad de dias que tiene el mes actual.
   for(let i=1; i <= cantDiasMes; i++){
     days.push(i)
   }
 
-let paginacion = days.slice(0,7)
-console.log('slice', paginacion)
-
   // agrega las celdas vacias
   for (let i=1; i <= celdasVacias; i++){
-    cells.push(<td></td>)
+    cells.push(<td key={`vacias-${i}`} onClick={handleDay}></td>)
   }
-
+  // Crea la primera fila con las vacias y las que tienen numero.
   for(let i=1; i<= 7-celdasVacias; i++){
     diasDelMes++
-    day === diasDelMes ? cells.push(<td style={{border: "1px solid green"}}>${diasDelMes}</td>) : cells.push(<td>${diasDelMes}</td>)
+    day === diasDelMes ? cells.push(<td key={`day-${diasDelMes}`} style={{border: "1px solid green", borderRadius: "5px"}} onClick={handleDay}>{diasDelMes}</td>) : cells.push(<td key={`day-${diasDelMes}`} onClick={handleDay}>{diasDelMes}</td>)
   }
-rows.push(<tr>
-  <td>1</td>
-  <td>2</td>
-  <td>3</td>
-  <td>4</td>
-  <td>5</td>
-  <td>6</td>
-  <td>7</td>
-  </tr>)
-rows.push(<tr>
-  <td>8</td>
-  <td>9</td>
-  <td>10</td>
-  <td>11</td>
-  <td>12</td>
-  </tr>)
+    rows.push(<tr key={`row-1`}>{cells}</tr>)
 
-  console.log(cells)
-  console.log(rows)
-//--------------------------
-
- 
-
- 
- 
-//--------------------------
+  for(let filas = 1; filas <= 6; filas++){
+    cells = []
+      for(let celdas = 1; celdas <= 7; celdas++){
+        if ( diasDelMes >= cantDiasMes){
+          cells.push(<td key={`empty-${filas}-${celdas}`}></td>);
+      }else{  
+        diasDelMes++
+        day === diasDelMes ? cells.push(<td key={`day-${diasDelMes}`} style={{border: "1px solid green", borderRadius:"5px"}} onClick={handleDay}>{diasDelMes}</td>) : cells.push(<td key={`day-${diasDelMes}`} onClick={handleDay}>{diasDelMes}</td>)
+      }
+      }
+      rows.push(<tr key={`row-${filas + 1}`}>{cells}</tr>)
+  }
 
   return (
     <div className="containerAlmanac">
       <table border="0">
-          { <caption>{day} de {monthString} de {year} </caption>}
+          { <caption><button className="btn-mes" onClick={handleAnt}><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z"/></svg></button>{day} de {monthString} de {year}<button className="btn-mes" onClick={handleNext}><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg></button></caption>}
         <thead>
         <tr>
           <th>DO</th>
@@ -79,26 +62,3 @@ rows.push(<tr>
 
 export default Almanac;
 
-/*
-// Crear las filas del calendario
-let rows = [];
-let cells = [];
-
-// Agregar celdas vacías para que el primer día del mes comience en el día correcto de la semana
-for (let i = 0; i < celdasVacias; i++) {
-  cells.push(<td key={`empty-${i}`}></td>);
-}
-
-console.log(cells)
-
-days.forEach((date, i) => {
-  cells.push(<td key={date}>{date}</td>);
-  
-  // Cada 7 celdas, o al final del array de días, agregamos una fila
-  if ((i + celdasVacias) % 7 === 6 || i === days.length - 1) {
-    rows.push(<tr key={`row-${i}`}>{cells}</tr>);
-    cells = []; // Limpiamos las celdas para la siguiente fila
-  }
-});
-
-*/

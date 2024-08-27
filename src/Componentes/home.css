@@ -50,15 +50,14 @@ footer {
 .almanaque, .farmacias {
   max-width: 100%;
   min-height: auto;
-  border: 1px solid green;
   display: flex;
   justify-content: center;
   align-items: center;
 
 }
 .btnSettings {
-  width: 3rem;
-  height: 3rem;
+  width: 2rem;
+  height: 2rem;
   background: transparent;
   background-image: url('../img/iconoConfigNegro.png');
   background-repeat: no-repeat;

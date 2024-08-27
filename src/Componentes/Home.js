@@ -13,7 +13,7 @@ const Home = () => {
   const [ cantDiasMes, setCantDiasMes ] = useState(new Date(year, month + 1, 0).getDate())
   const [ celdasVacias, setSeldasVacias ] = useState(new Date(year, month, 1).getDay())
 
-  
+  /*
   console.log('dia:', day)
   console.log('dia string:',dayString)
   console.log('mes:', month)
@@ -21,7 +21,25 @@ const Home = () => {
   console.log('año:', year)
   console.log('ultimo dia del mes anterior', cantDiasMes)
   console.log('celvas vacias', celdasVacias)
+  */
 
+  const handleAnt = () => {
+    console.log('anterior')
+    
+  }
+  const handleNext = () => {
+    console.log('siguiente')
+    
+  }
+  // el metodo trim() elimina los espacios vacios de lo que traiga el target
+  const handleDay = (e) => {
+    let textContent = e.currentTarget.textContent.trim();
+    if (textContent !== '') {      
+      textContent = parseInt(textContent)
+      setDay(textContent)
+    }
+  };
+  
   return (
     <div className="containerHome">
       <header>
@@ -29,7 +47,7 @@ const Home = () => {
       </header>
       <main>
         <article className="almanaque">
-             <Almanac day={day} monthString={monthString} year={year} cantDiasMes={cantDiasMes} celdasVacias={celdasVacias} />
+             <Almanac day={day}  monthString={monthString} year={year} cantDiasMes={cantDiasMes} celdasVacias={celdasVacias} handleAnt={handleAnt} handleNext={handleNext} handleDay={handleDay} />
         </article>
         <article className="farmacias">
             <p>farmacias</p>
