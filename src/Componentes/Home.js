@@ -56,7 +56,7 @@ const Home = () => {
       mes:"Diciembre"
     },
   ]
-  const [ almanacType, setAlmanacType ] = useState(true)
+  const [ almanacType, setAlmanacType ] = useState(false)
   const [ settings, setSettings ] = useState(false)
   const [ fecha, setFecha ] = useState(new Date());
   const [ day, setDay ] = useState(fecha.getDate()); // dia en numero.
@@ -132,7 +132,12 @@ const Home = () => {
               handleNext={handleNext} 
               handleDay={handleDay}
           /> : 
-            <AlmanacDay />
+            <AlmanacDay 
+              day={day}
+              monthString={monthString}
+              year={year}
+              dayString={dayString}
+              />
           }
           
         </article>

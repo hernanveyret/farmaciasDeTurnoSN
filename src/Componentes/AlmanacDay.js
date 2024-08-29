@@ -1,9 +1,21 @@
 import React from 'react';
+import './almanacDay.css';
 
-const AlmanacDay = () => {
+const AlmanacDay = ({day,monthString,year,dayString}) => {
+
   return (
     <div className="containerAlmanac">
-      <h2>Almanaque por dia</h2>
+      <div className="card">
+        <div className="infoCard">
+          <h3>{monthString}</h3>
+          <h4>{year}</h4>
+      </div>
+        <div className="day">
+          <p className="dayString">{dayString[0].toUpperCase() + dayString.slice(1)}</p>
+          <p className="dayNumber">{day}</p>
+          
+        </div>
+      </div>
     </div>
   )
 }
