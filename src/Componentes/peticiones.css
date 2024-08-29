@@ -1,0 +1,14 @@
+.containerFarmacias {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.items {
+  width: 90%;
+  border: 1px solid green;
+  border-radius: 1rem;
+  padding: .5rem;
+  margin: .3rem 0;
+}

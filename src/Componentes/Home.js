@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
 import Almanac from './Almanac';
 import AlmanacDay from './AlmanacDay';
 import Settings from './Settings';
+import Peticiones from './Peticiones';
 
 import './home.css';
 
@@ -67,6 +70,11 @@ const Home = () => {
   const [ year, setYear ] = useState(fecha.getFullYear()); // año
   const [ cantDiasMes, setCantDiasMes ] = useState(new Date(year, month + 1, 0).getDate()); // Ultimo dia del mes anterior
   const [ celdasVacias, setCeldasVacias ] = useState(new Date(year, month, 1).getDay()) // Posicion del primer dia del mes, del 0 al 6, dom-lun...
+
+  // ************************************
+
+  // ************************************
+
   /*
   console.log('dia:', day)
   console.log('dia string:',dayString)
@@ -76,6 +84,7 @@ const Home = () => {
   console.log('ultimo dia del mes anterior', cantDiasMes) // ultimo dia del mes anterior
   console.log('celvas vacias', celdasVacias); // posicion del primer dia del mes del 0 al 6.
   */
+
 
   // Mes anterior
   const handlePrev = () => {
@@ -117,7 +126,6 @@ const Home = () => {
         </button>
       </header>
       <main>
-          
             <Settings settingOptions={settingOptions}/>
           
         <article className="almanaque">
@@ -131,18 +139,23 @@ const Home = () => {
               handlePrev={handlePrev} 
               handleNext={handleNext} 
               handleDay={handleDay}
-          /> : 
-            <AlmanacDay 
+              /> : 
+              <AlmanacDay 
               day={day}
               monthString={monthString}
               year={year}
               dayString={dayString}
               />
-          }
+            }
           
         </article>
         <article className="farmacias">
-            <p>Lista de farmacias</p>
+        <h2>Datos de Farmacias</h2>
+            <Peticiones
+              day={day}
+              month={month}
+              year={year}
+            />
         </article>
       </main>
       <footer>
