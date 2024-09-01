@@ -17,7 +17,7 @@ app.get('/api/farmacias/:year/:month/:day', async (req, res) => {
     res.json(response.data);  // Devuelve la respuesta de la API externa al cliente
   } catch (error) {
     console.error('Error fetching data:', error);
-    res.status(500).json({ message: 'Error fetching data' });
+    res.status(500).json({ message: 'Error al recibir los datos' });
   }
 });
 
