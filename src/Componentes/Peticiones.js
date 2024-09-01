@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
 import './peticiones.css';
 import logoMap from '../img/iconoMaps.png';
 
@@ -10,9 +9,8 @@ const Peticiones = ({ day, month, year, setLoader }) => {
 
   useEffect(() => {
     setLoader(true);
-    axios.get(`/api/farmacias/${year}/${month + 1}/${day}`)
+    axios.get(`https://farmacias-de-turno-sn.vercel.app/api/farmacias/${year}/${month + 1}/${day}`)
       .then(response => {
-        console.log(response.data)
         setData(response.data);
         setLoader(false);
       })
