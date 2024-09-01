@@ -11,6 +11,8 @@ const Peticiones = ({ day, month, year, setLoader }) => {
     setLoader(true);
     axios.get(`https://farmacias-de-turno-sn.vercel.app/api/farmacias/${year}/${month + 1}/${day}`)
       .then(response => {
+        console.log(response)
+        console.log(response.data)
         setData(response.data);
         setLoader(false);
       })
