@@ -1,6 +1,7 @@
 :root {
   --altoHeader: 3rem;
   --altoFooter: 3rem;
+  --darkModeBody: #1F1F1F;
 }
 .containerHome {
   max-width: 100%;
@@ -67,6 +68,14 @@ footer {
   color: white;
   position: absolute;
   right: .5rem;
+}
+
+.activateDarkMode {
+  background-color: black;
+}
+.activateDarkModeBody {
+  background-color: var(--darkModeBody);
+  color: white;
 }
 @media screen and ( min-width: 37em) {
   main {
