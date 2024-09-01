@@ -28,7 +28,7 @@ const Peticiones = ({ day, month, year, setLoader }) => {
   }
 
   if (!data) {
-    return <div>Cargando...</div>;
+    return <div></div>;
   }
 
   return (
