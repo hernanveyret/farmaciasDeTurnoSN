@@ -6,12 +6,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 //app.use(cors()); // Permitir todas las solicitudes CORS, aunque no es estrictamente necesario aquí
-app.use(cors({
-  origin: '*',  // Permite todas las solicitudes de cualquier origen
-  methods: 'GET,POST,PUT,DELETE,OPTIONS',
-  allowedHeaders: 'Content-Type,Authorization'
-}));
-
+app.use(cors());
 
 // Ruta que actuará como proxy para la API externa
 app.get('/api/farmacias/:year/:month/:day', async (req, res) => {
