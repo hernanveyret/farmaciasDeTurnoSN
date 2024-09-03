@@ -139,7 +139,7 @@ console.log(diaDeLaSemana); // Por ejemplo, "martes"
     let algo = new Date(year,month,day)
     let diaDeLaSemana = algo.toLocaleString('es-ES', { weekday: 'long' })
     setDayString(diaDeLaSemana)
-  },[day]);
+  },[day,month]);
 
   useEffect(() => {
     setCantDiasMes(new Date(year, month + 1, 0).getDate())

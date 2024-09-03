@@ -6,12 +6,15 @@ import logoMap from '../img/iconoMaps.png';
 const Peticiones = ({ day, month, year, setLoader }) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
-/*
+
+  const url = `https://farmacias-de-turno-sn.vercel.app/api/farmacias/${year}/${month + 1}/${day}`
+  console.log(url)
   useEffect(() => {
+
     setLoader(true);
-    axios.get(`https://farmacias-de-turno-sn.vercel.app/api/farmacias/${year}/${month + 1}/${day}`)
+    axios.get(url)
       .then(response => {
-        console.log(response)
+       // console.log(response)
         console.log(response.data)
         setData(response.data);
         setLoader(false);
@@ -21,39 +24,8 @@ const Peticiones = ({ day, month, year, setLoader }) => {
         setError('Hubo un error al obtener los datos.');
         setLoader(false);
       });
-  }, [day, month, year, setLoader]);
-*/
-let url = `https://farmacias-de-turno-sn.vercel.app/api/farmacias/2024/${month + 1}/${day}`
+  }, [day, month, year, setLoader,url]);
 
-useEffect(() => {
-  const dataFetch = async () => {    
-    setLoader(true);
-   try {
-       const res = await fetch(url);  
-       if(!res.ok){
-         const errorData = {
-           status:res.status || "00",
-           statusText:res.statusText || "Error, id_Interno: no se pudo comunicar con la base de datos."
-         }
-         throw errorData;           
-       }
-       const db = await res.json()
- 
-       setData(db);
-
-       console.log(db)
-       setLoader(false);
-
-   }catch(err){
-     setError(err)
-     const message = `Error: ${err.status}, ${err.statusText}`
-     console.log(message)
-     setLoader(false)
-   }
- }
- dataFetch()  
-
-},[url])
 
   if (error) {
     return <div>{error}</div>;
