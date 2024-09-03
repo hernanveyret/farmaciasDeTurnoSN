@@ -8,8 +8,12 @@ const Peticiones = ({ day, month, year, setLoader }) => {
   const [error, setError] = useState(null);
 
   const url = `https://farmacias-de-turno-sn.vercel.app/api/farmacias/${year}/${month + 1}/${day}`
+
   console.log(url)
+
   useEffect(() => {
+    
+    console.log(url)
 
     setLoader(true);
     axios.get(url)
