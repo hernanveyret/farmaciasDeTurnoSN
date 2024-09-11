@@ -3,23 +3,30 @@ import axios from 'axios';
 import './peticiones.css';
 import logoMap from '../img/iconoMaps.png';
 
-const Peticiones = ({ day, month, year, setLoader }) => {
+const Peticiones = ({hora, day,setDay, month, year, setLoader,setMonth }) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
+  const [array, setArray] = useState([])
+  const [letra, setLetra] = useState('')
 
-  const url = `https://farmacias-de-turno-sn.vercel.app/api/farmacias/${year}/${month + 1}/${day}`
+  //const url = `https://farmacias-de-turno-sn.vercel.app/api/farmacias/${year}/${month + 1}/${day}`
+  const url = 'http://localhost:5000/2024'
 
-  console.log(url)
+  const convertToTime = (timeStr) => {
+    const [hours, minutes, seconds] = timeStr.split(':');
+    return new Date(2024, 0, 1, hours, minutes, seconds).getTime();
+  };
+
+  const horaActual = convertToTime(hora);
+  const inicio = convertToTime('00:00:00');
+  const fin = convertToTime('08:30:00');
 
   useEffect(() => {
-    
-    console.log(url)
-
+  
     setLoader(true);
     axios.get(url)
       .then(response => {
-       // console.log(response)
-        console.log(response.data)
+       //console.log(response) 
         setData(response.data);
         setLoader(false);
       })
@@ -28,8 +35,42 @@ const Peticiones = ({ day, month, year, setLoader }) => {
         setError('Hubo un error al obtener los datos.');
         setLoader(false);
       });
-  }, [day, month, year, setLoader,url]);
+  }, []);
 
+useEffect(() => {
+  setMonth(prevMonth => prevMonth )
+  //console.log('mes:',month+1)
+  //console.log('dia:',day)
+},[month,day])
+
+useEffect(() => {
+
+  if(horaActual >= inicio && horaActual <= fin){
+    console.log('muestra letra del dia anteior')
+    if (data) {
+      const newArray = []; // Reinicia el array para evitar duplicados
+      data[month][month+1][day-2].pharmacies.forEach(e => {
+        newArray.push(e);
+      });
+      setArray(newArray); // Actualiza el estado con el nuevo array
+      setLetra(data[month][month+1][day-2].dateShift.toUpperCase())
+    }
+    
+  }else{
+    console.log('Muestra la letra del dia actual')
+    
+  if (data) {
+    const newArray = []; // Reinicia el array para evitar duplicados
+    data[month][month+1][day-1].pharmacies.forEach(e => {
+      newArray.push(e);
+    });
+    setArray(newArray); // Actualiza el estado con el nuevo array
+    setLetra(data[month][month+1][day-1].dateShift.toUpperCase())
+  }
+  }
+
+
+}, [data, month, day]);
 
   if (error) {
     return <div>{error}</div>;
@@ -41,17 +82,24 @@ const Peticiones = ({ day, month, year, setLoader }) => {
 
   return (
     <div className="containerFarmacias">
-      <p>Letra: <span style={{ color: "green", fontWeight: "bold" }}>{data.dateShift}</span></p>
-      {data.pharmacies.map((e, i) => (
+      <h2>Datos de Farmacias</h2>
+      <p>Letra: <span style={{ color: "green", fontWeight: "bold" }}>{letra}</span></p>
+      {array.map((e, i) => (
         <div className="items" key={i}>
           <div className="infoItems">
             <p>{e.name}</p>
             <p>{e.address}</p>
+          { e.tel && <a href={e.tel} className="btn-tel">{e.tel} </a> }
           </div>
           <div className="btn-container">
-            <button className="btn-map">
-              <img src={logoMap} alt="Logo maps" />
-            </button>
+          
+          <a href={`https://www.google.com/maps/search/?api=1&query=${e.lat},${e.lon}`} rel="noopener" target="_blank">
+  <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#EA3323">
+    <path d="M480.06-486.67q30.27 0 51.77-21.56 21.5-21.55 21.5-51.83 0-30.27-21.56-51.77-21.55-21.5-51.83-21.5-30.27 0-51.77 21.56-21.5 21.55-21.5 51.83 0 30.27 21.56 51.77 21.55 21.5 51.83 21.5ZM480-80Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Z"/>
+  </svg>
+</a>
+
+            
           </div>
         </div>
       ))}
@@ -60,3 +108,5 @@ const Peticiones = ({ day, month, year, setLoader }) => {
 };
 
 export default Peticiones;
+
+

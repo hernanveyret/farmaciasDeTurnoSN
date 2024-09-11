@@ -17,6 +17,9 @@ header {
   align-items: center;
   background-color: green;
   position: relative;
+  position:sticky;
+  top: 0;
+  z-index: 1001;
 }
 h1 {
   color: white;
@@ -83,7 +86,8 @@ footer {
   }
   .almanaque, .farmacias {
     width: 50vw;
-    min-height: calc(50vh - var(--altoHeader));
+    /* min-height: calc(50vh - var(--altoHeader)); */
+    max-height: calc(100vh - var(--altoHeader));
     border: 1px solid green;
   }
 }

@@ -84,6 +84,11 @@ const Home = () => {
   const [ cantDiasMes, setCantDiasMes ] = useState(new Date(year, month + 1, 0).getDate()); // Ultimo dia del mes anterior
   const [ celdasVacias, setCeldasVacias ] = useState(new Date(year, month, 1).getDay()) // Posicion del primer dia del mes, del 0 al 6, dom-lun...
   
+  let hs = fecha.getHours();
+  let mn = fecha.getMinutes();
+  let ss = fecha.getSeconds()
+  const [hora, setHora ] = useState(mn < 9 ? `${hs}:0${mn}:0${ss}`: `${hs}:${mn}:${ss}` )
+  
   /*
 
 
@@ -108,11 +113,11 @@ console.log(diaDeLaSemana); // Por ejemplo, "martes"
 
   // Mes anterior
   const handlePrev = () => {
-    month === 0 ? setMonth(0) : setMonth(month - 1);
+    month === 0 ? setMonth(0) : setMonth(prevMonth => prevMonth - 1);
   }
   //Mes siguiente
   const handleNext = () => {
-     month === 11 ? setMonth(11) : setMonth(month + 1);
+     month === 11 ? setMonth(11) : setMonth(prevMonth => prevMonth + 1);
   }
   // Dia  anterior
   const handleChangeDayStringPrev = () => {
@@ -250,10 +255,12 @@ console.log(diaDeLaSemana); // Por ejemplo, "martes"
           }  
         </article>
         <article className="farmacias">
-        <h2>Datos de Farmacias</h2>
             <Peticiones
+              hora={hora}
               day={day}
+              setDay={setDay}
               month={month}
+              setMonth={setMonth}
               year={year}
               setLoader={setLoader}
             />
